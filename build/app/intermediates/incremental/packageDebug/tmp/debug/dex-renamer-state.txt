@@ -1,0 +1,4 @@
+#Tue May 25 15:06:54 IST 2021
+base.0=/Users/nidulachithwara/Desktop/navigation_drawer_example-master/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
