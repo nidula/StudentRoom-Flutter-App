@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
-class UserPage extends StatelessWidget {
+class UserPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) => Scaffold(
+  _UserPageState createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
         //drawer: NavigationDrawerWidget(),
         appBar: AppBar(
           title: Text('User Profile'),
           centerTitle: true,
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.green,
         ),
+       
       );
+  }
 }

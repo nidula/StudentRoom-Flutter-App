@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/nidulachithwara/Desktop/navigation_drawer_example-master/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ml/values-ml.xml",
+            "outputFile": "D:\\personalize\\NSBM\\Final Year\\2ns Sem\\DS lecture\\Project\\StudentRoom-Flutter-App\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ml\\values-ml.xml",
             "map": [
                 {
-                    "source": "/Users/nidulachithwara/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/values-ml/values-ml.xml",
+                    "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-2\\files-2.1\\2e94107f30f39be366a17347c2bf100b\\core-1.1.0\\res\\values-ml\\values-ml.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
