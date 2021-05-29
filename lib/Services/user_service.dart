@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:navigation_drawer_example/Models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -13,7 +12,7 @@ class UserService extends Model{
 
   Future<List<Users>> getAllUsers() async {
     try {
-      String url = "https://hivi-99-apigateway-gww2g.ondigitalocean.app/User";
+      String url = "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         List<Users> userList = parseUsers(response.body);
@@ -29,4 +28,27 @@ class UserService extends Model{
       throw Exception('$error');
     }
   }
+
+  Future<Users> getUserByCredentials(int id,String pw) async {
+    try {
+      String url =
+          "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users/GetUserByCredentials/$id/$pw";
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        List<Users> userByNicList = parseUsers(response.body);
+        if (userByNicList.isNotEmpty) {
+          return userByNicList[0];
+        } else {
+          throw Exception('no user found with this Credentials');
+        }
+      } else {
+        throw Exception('${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('$error');
+    }
+  }
+
+
+
 }
