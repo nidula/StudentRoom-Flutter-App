@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:navigation_drawer_example/Models/reservation_model.dart';
 import 'package:navigation_drawer_example/Models/room_model.dart';
+import 'package:navigation_drawer_example/Services/reservation_service.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:http/http.dart' as http;
@@ -30,8 +32,32 @@ class StudyRoomService extends Model{
     }
   }
 
-  // Future<List<StudyRoom>> getAvailableRooms() async {
-    
-  // }
+  Future<List<StudyRoom>> getAvailableRooms(DateTime fTime,DateTime tTime, DateTime date) async {
+    ReservationService rs = new ReservationService();
+    try {
+      List<StudyRoom> std = getAllRooms() as List<StudyRoom>;
+      List<Reservation> res = rs.getReservtionsByTime(fTime, tTime, date) as List<Reservation>;
+      
+      int stdcount = std.length;
+      int rescount = res.length;
+
+      for(int i=0;i<stdcount;i++)
+      {
+        for(int d=0; d<rescount;d++)
+        {
+          int srid = std[i].sId;
+          int rsid = res[d].sID;
+          if(rsid== srid)
+          {
+            std.removeAt(i);
+            break;
+          }
+        }
+      }
+      return std;
+    } catch (error) {
+      throw Exception('$error');
+    }
+  }
 
 }

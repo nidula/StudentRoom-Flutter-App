@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-Reservation issueFromJson(String str) => Reservation.fromJson(json.decode(str));
+Reservation reservationFromJson(String str) => Reservation.fromJson(json.decode(str));
 
-String issueToJson(Reservation data) => json.encode(data.toJson());
+String reservationToJson(Reservation data) => json.encode(data.toJson());
 
 class Reservation{
 
