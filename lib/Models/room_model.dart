@@ -8,14 +8,14 @@ String issueToJson(StudyRoom data) => json.encode(data.toJson());
 class StudyRoom{
 
 late int sId;
-late int Floor;
+late int floor;
 late int capacity;
 late int options;
 late String location;
 
 StudyRoom(
   this.sId,
-  this.Floor,
+  this.floor,
   this.capacity,
   this.options,
   this.location,
@@ -31,7 +31,7 @@ factory StudyRoom.fromJson(Map<String, dynamic> json)=> StudyRoom(
 
    Map<String, dynamic> toJson() =>{
      "sId": sId,
-     "floor":Floor,
+     "floor":floor,
      "capacity":capacity,
      "options":options,
      "location":location,
