@@ -7,7 +7,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -16,3 +15,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+analyzer:
+  strong-mode: true
+  language:
+    enableSuperMixins: true
