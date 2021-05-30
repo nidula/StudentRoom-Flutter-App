@@ -30,6 +30,27 @@ class UserService extends Model{
     }
   }
 
+  Future<Users> getUserById(int id) async
+  {
+    try {
+      String url =
+          "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users/$id";
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        List<Users> userList = parseUsers(response.body);
+        if (userList.isNotEmpty) {
+          return userList[0];
+        } else {
+          throw Exception('no user found with this Credentials');
+        }
+      } else {
+        throw Exception('${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('$error');
+    }
+  }
+
   Future<Users> getUserByCredentials(int id,String pw) async {
     try {
       String url =
