@@ -6,8 +6,10 @@ import 'package:navigation_drawer_example/Models/room_model.dart';
 
 class ReservationCard extends StatefulWidget {
   final StudyRoom room;
+  final String tim;
   const ReservationCard({
     required this.room,
+    required this.tim,
   });
   @override
   _ReservationCardState createState() => _ReservationCardState();
@@ -18,6 +20,7 @@ class _ReservationCardState extends State<ReservationCard> {
   late String location;
   late String floor;
   late String capacity;
+  late String _time;
 
   void ConvertString() {
     int fl = _room.floor;
@@ -26,7 +29,7 @@ class _ReservationCardState extends State<ReservationCard> {
     location = _room.location;
     floor =  fl.toString();
     capacity = ca.toString();
-
+    
     print(location);
     print(floor);
     print(capacity);
@@ -35,6 +38,7 @@ class _ReservationCardState extends State<ReservationCard> {
   @override
   void initState() {
     _room = widget.room;
+    _time = widget.tim;
     ConvertString();
     super.initState();
   }
@@ -102,7 +106,7 @@ class _ReservationCardState extends State<ReservationCard> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.event_available_sharp,
+                                Icons.people,
                                 color: Colors.greenAccent,
                               ),
                               SizedBox(
@@ -172,7 +176,7 @@ class _ReservationCardState extends State<ReservationCard> {
                               ),
                               SizedBox(
                                 child: Text(
-                                  "Evning",
+                                  _time,
                                   style: TextStyle(color: Colors.black),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,

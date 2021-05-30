@@ -125,7 +125,7 @@ Future<List<StudyRoom>> getRooms() async {
                       itemBuilder: (context, index)
                       {
                         StudyRoom st = _rooms[index];
-                        return ReservationCard(room: st,);
+                        return ReservationCard(room: st,tim: _slot,);
                       }
                       );
                   }
