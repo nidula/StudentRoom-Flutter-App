@@ -13,7 +13,7 @@ class UserService extends Model{
 
   Future<List<Users>> getAllUsers() async {
     try {
-      String url = "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users";
+      String url = "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         List<Users> userList = parseUsers(response.body);
@@ -33,12 +33,12 @@ class UserService extends Model{
   Future<Users> getUserByCredentials(int id,String pw) async {
     try {
       String url =
-          "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users/GetUserByCredentials/$id/$pw";
+          "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Users/GetUserByCredentials/$id/$pw";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        List<Users> userByNicList = parseUsers(response.body);
-        if (userByNicList.isNotEmpty) {
-          return userByNicList[0];
+        List<Users> userList = parseUsers(response.body);
+        if (userList.isNotEmpty) {
+          return userList[0];
         } else {
           throw Exception('no user found with this Credentials');
         }
@@ -50,6 +50,15 @@ class UserService extends Model{
     }
   }
 
+Future<int> loginUser(String id, String password) async {
 
+    int d = int.parse(id);
+    Users user = await getUserByCredentials(d,password);
+    if (user != null) {
+      return user.uId;
+    } else {
+      throw Exception('Invalid Credentials!');
+    }
+  }
 
 }
