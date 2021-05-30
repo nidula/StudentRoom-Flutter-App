@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:navigation_drawer_example/Models/user_model.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:http/http.dart' as http;

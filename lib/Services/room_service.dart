@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:navigation_drawer_example/Models/reservation_model.dart';
 import 'package:navigation_drawer_example/Models/room_model.dart';
 import 'package:navigation_drawer_example/Services/reservation_service.dart';
-import 'package:scoped_model/scoped_model.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import "package:scoped_model/scoped_model.dart" show Model;
 
 import 'package:http/http.dart' as http;
 
-class StudyRoomService extends Model{
-
+class StudyRoomService extends Model {
   List<StudyRoom> parseStudyRoom(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<StudyRoom>((json) => StudyRoom.fromJson(json)).toList();
@@ -15,7 +15,8 @@ class StudyRoomService extends Model{
 
   Future<List<StudyRoom>> getAllRooms() async {
     try {
-      String url = "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Rooms";
+      String url =
+          "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Rooms";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         List<StudyRoom> studyRoomList = parseStudyRoom(response.body);
@@ -32,32 +33,23 @@ class StudyRoomService extends Model{
     }
   }
 
-  Future<List<StudyRoom>> getAvailableRooms(DateTime fTime,DateTime tTime, DateTime date) async {
-    ReservationService rs = new ReservationService();
+  Future<List<StudyRoom>> getAvailableRooms(DateTime fTime, DateTime tTime, DateTime date) async {
     try {
-      List<StudyRoom> std = getAllRooms() as List<StudyRoom>;
-      List<Reservation> res = rs.getReservtionsByTime(fTime, tTime, date) as List<Reservation>;
-      
-      int stdcount = std.length;
-      int rescount = res.length;
-
-      for(int i=0;i<stdcount;i++)
-      {
-        for(int d=0; d<rescount;d++)
-        {
-          int srid = std[i].sId;
-          int rsid = res[d].sID;
-          if(rsid== srid)
-          {
-            std.removeAt(i);
-            break;
-          }
+      String url =
+          "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Rooms/GetBookingsByTime/$fTime/$tTime/$date";
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        List<StudyRoom> studyRoomList = parseStudyRoom(response.body);
+        if (studyRoomList.isNotEmpty) {
+          return studyRoomList;
+        } else {
+          return studyRoomList;
         }
+      } else {
+        throw Exception('${response.statusCode}');
       }
-      return std;
     } catch (error) {
       throw Exception('$error');
     }
   }
-
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_drawer_example/widget/reservation_card.dart';
 
 class UserPage extends StatefulWidget {
   @override
@@ -85,7 +84,7 @@ class _UserPageState extends State<UserPage> {
            SizedBox(
              height: MediaQuery.of(context).size.height*0.05,
            ),
-           ReservationCard(),
+          
          ],
        ),
       );

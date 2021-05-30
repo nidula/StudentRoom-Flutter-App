@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:navigation_drawer_example/Models/reservation_model.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:http/http.dart' as http;
@@ -22,14 +23,14 @@ class ReservationService extends Model{
 
   Future<List<Reservation>> getReservtionsByTime(DateTime ftime,DateTime tTime,DateTime date) async {
     try {
-      String url = "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Books/GetBookingsByTime/$ftime/$tTime/$date";
+      String url = "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Books/GetBookingsByTime/$ftime/$tTime/$date";
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         List<Reservation> studyRoomList = parseReservation(response.body);
         if (studyRoomList.isNotEmpty) {
           return studyRoomList;
         } else {
-          throw Exception('no eservations');
+          return studyRoomList = [];
         }
       } else {
         throw Exception('${response.statusCode}');

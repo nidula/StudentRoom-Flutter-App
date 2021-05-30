@@ -19,35 +19,32 @@ class Reservation{
       this.bid,
       this.fromTime,
       this.toTime,
-      this.reservationDate,
-      this.sID,
       this.studentCount,
+      this.reservationDate,
+      this.userId,
+      this.sID,
       this.purpose,
-      this.userId, 
   );
 
   factory Reservation.fromJson(Map<String, dynamic> json)=> Reservation(
    json["bId"],
    json["fromTime"],
    json["toTime"],
-   json["reservationDate"],
-   json["sid"],
    json["studentCount"],
+   json["reservationDate"],
+   json["userId"],
+   json["sid"],
    json["purpose"],
-   json["userId"]
   );
 
    Map<String, dynamic> toJson() =>{
      "bId": bid,
-     "FromTime":fromTime,
-     "ToTime":toTime,
-     "StudentCount":studentCount,
-     "ReservationDate":reservationDate,
-     "UserId":userId,
+     "fromTime":fromTime,
+     "toTime":toTime,
+     "studentCount":studentCount,
+     "reservationDate":reservationDate,
+     "userId":userId,
      "sid":sID,
-     "Purpose":purpose
+     "purpose":purpose
    };
-
-
-
 }
