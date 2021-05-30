@@ -52,4 +52,24 @@ class StudyRoomService extends Model {
       throw Exception('$error');
     }
   }
+
+  Future<List<StudyRoom>> getRoomsByUser(int id) async {
+    try {
+      String url =
+          "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Rooms/GetRoomByBooking/$id";
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        List<StudyRoom> studyRoomList = parseStudyRoom(response.body);
+        if (studyRoomList.isNotEmpty) {
+          return studyRoomList;
+        } else {
+          return studyRoomList;
+        }
+      } else {
+        throw Exception('${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('$error');
+    }
+  }
 }
