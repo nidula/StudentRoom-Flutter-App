@@ -1,4 +1,0 @@
-#Mon May 31 06:43:22 IST 2021
-base.0=D\:\\personalize\\NSBM\\Final Year\\2ns Sem\\DS lecture\\Project\\StudentRoom-Flutter-App\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
