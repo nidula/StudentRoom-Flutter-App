@@ -21,23 +21,24 @@ class ReservationService extends Model{
     return response;
   }
 
-  Future<List<Reservation>> getReservtionsByTime(DateTime ftime,DateTime tTime,DateTime date) async {
-    try {
-      String url = "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Books/GetBookingsByTime/$ftime/$tTime/$date";
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        List<Reservation> studyRoomList = parseReservation(response.body);
-        if (studyRoomList.isNotEmpty) {
-          return studyRoomList;
-        } else {
-          return studyRoomList = [];
-        }
-      } else {
-        throw Exception('${response.statusCode}');
-      }
-    } catch (error) {
-      throw Exception('$error');
-    }
-  }
+// ABANDED METHOD
+  // Future<List<Reservation>> getReservtionsByTime(DateTime ftime,DateTime tTime,DateTime date) async {
+  //   try {
+  //     String url = "https://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Books/GetBookingsByTime/$ftime/$tTime/$date";
+  //     final response = await http.get(Uri.parse(url));
+  //     if (response.statusCode == 200) {
+  //       List<Reservation> studyRoomList = parseReservation(response.body);
+  //       if (studyRoomList.isNotEmpty) {
+  //         return studyRoomList;
+  //       } else {
+  //         return studyRoomList = [];
+  //       }
+  //     } else {
+  //       throw Exception('${response.statusCode}');
+  //     }
+  //   } catch (error) {
+  //     throw Exception('$error');
+  //   }
+  // }
   
 }
