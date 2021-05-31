@@ -13,11 +13,13 @@ class ReservationService extends Model{
   }
 
    Future<http.Response> addReservtion(Reservation reservation) async {
-    String url = "http://hivi-99-ocelotapigateway-r2vpq.ondigitalocean.app/Books";
+     print("araka athulta aawa");
+    String url = "https://hivi-99-bookingapi-sdqti.ondigitalocean.app/api/v1/Books";
 
     final http.Response response = await http.post(Uri.parse(url),
         headers: {HttpHeaders.contentTypeHeader: 'application/json'},
         body: reservationToJson(reservation));
+      print(response);
     return response;
   }
 

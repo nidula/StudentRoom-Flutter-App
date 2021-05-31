@@ -5,7 +5,6 @@ import 'package:navigation_drawer_example/widget/custom_alert.dart';
 import 'package:navigation_drawer_example/widget/custom_loading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'availableRoomPage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -37,7 +36,6 @@ class _LoginState extends State<Login> {
     }
   }
 
-  late FocusNode _passwordFocusNode;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

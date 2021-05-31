@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_drawer_example/Models/reservation_model.dart';
+import 'package:intl/intl.dart';
 import 'package:navigation_drawer_example/Models/room_model.dart';
 import 'package:navigation_drawer_example/Services/reservation_service.dart';
 import 'package:navigation_drawer_example/Services/room_service.dart';
@@ -14,22 +14,21 @@ class _AvailableRoomsPageState extends State<AvailableRoomsPage> {
   ReservationService rs = new ReservationService();
   StudyRoomService _roomService = StudyRoomService();
   late List<StudyRoom> _rooms;
-  String _slot = "Morning";
+  String _slot = "0";
   DateTime date = DateTime.now();
   
-  late DateTime fromTime=new DateTime(date.year, date.month, date.day, 9, 00, 00);
-  late DateTime toTime=new DateTime(date.year, date.month, date.day, 12, 30, 00);
-  late DateTime dt = new DateTime(date.year, date.month, date.day, 00, 00, 00);
+  
   
 
 
 Future<List<StudyRoom>> getRooms() async {
     try {
-    List<StudyRoom> room =  await _roomService.getAvailableRooms(fromTime, toTime, dt);
-    print(fromTime);
-    print(toTime);
+      String _date = DateFormat('y-d-M').format(date);
+      int _slt = int.parse(_slot);
+    List<StudyRoom> room =  await _roomService.getAvailableRooms(_slt, _date);
+  
     print(room);
-    print(date);
+    //print(date);
      return room;
     } catch (e) {
       throw Exception("$e");
@@ -62,29 +61,17 @@ Future<List<StudyRoom>> getRooms() async {
                           items: <DropdownMenuItem<String>>[
                             new DropdownMenuItem(
                               child: new Text('Morning'),
-                              value: "Morning",
+                              value: "0",
                             ),
                             new DropdownMenuItem(
                               child: new Text('Evening'),
-                              value: "Evening",
+                              value: "1",
                             ),
                           ],
                           onChanged: (value) {
                             setState(() {
                               _slot = value.toString();
-                              if (_slot == "Morning") {
-                                fromTime =
-                                    new DateTime(date.year, date.month, date.day, 9, 00, 00);
-                                toTime =
-                                    new DateTime(date.year, date.month, date.day, 12, 30, 00);
                                     getRooms();
-                              } else {
-                                fromTime =
-                                    new DateTime(date.year, date.month, date.day, 13, 00, 00);
-                                toTime =
-                                    new DateTime(date.year, date.month, date.day, 16, 30, 00);
-                                    getRooms();
-                              }
                             });
                           },
                         ),

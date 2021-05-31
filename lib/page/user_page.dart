@@ -3,6 +3,7 @@ import 'package:navigation_drawer_example/Models/room_model.dart';
 import 'package:navigation_drawer_example/Models/user_model.dart';
 import 'package:navigation_drawer_example/Services/room_service.dart';
 import 'package:navigation_drawer_example/Services/user_service.dart';
+import 'package:navigation_drawer_example/page/login_page.dart';
 import 'package:navigation_drawer_example/widget/room_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,6 +47,18 @@ class _UserPageState extends State<UserPage> {
     }
   }
 
+  logOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("access", false);
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => Login(),
+      ),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +66,7 @@ class _UserPageState extends State<UserPage> {
           title: Text('User Profile'),
           centerTitle: true,
           backgroundColor: Colors.green,
+          
         ),
        body: Column(
          children: [
@@ -150,6 +164,34 @@ class _UserPageState extends State<UserPage> {
                  }),
                SizedBox(
                 width: 10.0,
+              ),
+              GestureDetector(
+                onTap: () {
+                  logOut();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text(
+                        "log out",
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
               ),
              ],
            ),

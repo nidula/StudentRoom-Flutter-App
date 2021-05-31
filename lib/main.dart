@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:navigation_drawer_example/main_screen.dart';
 import 'package:navigation_drawer_example/page/login_page.dart';
 
 Future main() async {

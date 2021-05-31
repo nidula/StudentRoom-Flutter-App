@@ -6,19 +6,16 @@ String reservationToJson(Reservation data) => json.encode(data.toJson());
 
 class Reservation{
 
- int bid;
- DateTime fromTime;
- DateTime toTime;
+  int slot;
  int studentCount;
- DateTime reservationDate;
+ String reservationDate;
  int userId;
  int sID;
  String purpose;
 
+
   Reservation(
-      this.bid,
-      this.fromTime,
-      this.toTime,
+    this.slot,
       this.studentCount,
       this.reservationDate,
       this.userId,
@@ -27,9 +24,7 @@ class Reservation{
   );
 
   factory Reservation.fromJson(Map<String, dynamic> json)=> Reservation(
-   json["bId"],
-   json["fromTime"],
-   json["toTime"],
+  json["Slot"],
    json["studentCount"],
    json["reservationDate"],
    json["userId"],
@@ -38,9 +33,7 @@ class Reservation{
   );
 
    Map<String, dynamic> toJson() =>{
-     "bId": bid,
-     "fromTime":fromTime,
-     "toTime":toTime,
+     "Slot":slot,
      "studentCount":studentCount,
      "reservationDate":reservationDate,
      "userId":userId,
