@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_drawer_example/Models/room_model.dart';
+import 'package:navigation_drawer_example/Services/room_service.dart';
 
 class ResrvationPage extends StatefulWidget {
   @override
@@ -7,15 +9,22 @@ class ResrvationPage extends StatefulWidget {
 
 class _ResrvationPageState extends State<ResrvationPage> {
   DateTime _date = DateTime.now();
-
+  StudyRoomService _roomService = StudyRoomService();
   late String purpose;
   late int studentId;
   late int studentCount;
   late int studyroomId;
-  late DateTime fromTime;
-  late DateTime toTime;
-  late DateTime date;
   String _slot = "Morning";
+
+  List<String> _states = ["Choose a state"];
+  List<String> _lgas = ["Choose .."];
+String _selectedState = "Choose a state";
+
+  late DateTime fromTime =
+      new DateTime(_date.year, _date.month, _date.day, 9, 00, 00);
+  late DateTime toTime =
+      new DateTime(_date.year, _date.month, _date.day, 12, 30, 00);
+  late DateTime dt = new DateTime(_date.year, _date.month, _date.day, 00, 00, 00);
 
   void _selectDate() async {
     final DateTime? newDate = await showDatePicker(
@@ -31,6 +40,25 @@ class _ResrvationPageState extends State<ResrvationPage> {
       });
     }
   }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<List<StudyRoom>> getRooms() async {
+    try {
+      List<StudyRoom> room =
+          await _roomService.getAvailableRooms(fromTime, toTime, dt);
+      print(fromTime);
+      print(toTime);
+      print(room);
+      return room;
+    } catch (e) {
+      throw Exception("$e");
+    }
+  }
+
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -71,14 +99,16 @@ class _ResrvationPageState extends State<ResrvationPage> {
                               _slot = value.toString();
                               if (_slot == "Morning") {
                                 fromTime =
-                                    TimeOfDay(hour: 9, minute: 0) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 9, 00, 00);
                                 toTime =
-                                    TimeOfDay(hour: 12, minute: 30) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 12, 30, 00);
+                                    // getRooms();
                               } else {
                                 fromTime =
-                                    TimeOfDay(hour: 13, minute: 0) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 13, 00, 00);
                                 toTime =
-                                    TimeOfDay(hour: 16, minute: 30) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 16, 30, 00);
+                                    // getRooms();
                               }
                             });
                           },
@@ -86,7 +116,7 @@ class _ResrvationPageState extends State<ResrvationPage> {
                       ],
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width*0.1,
+                      width: MediaQuery.of(context).size.width * 0.1,
                     ),
                     Column(
                       children: [
@@ -96,11 +126,11 @@ class _ResrvationPageState extends State<ResrvationPage> {
                           dropdownColor: Colors.white,
                           items: <DropdownMenuItem<String>>[
                             new DropdownMenuItem(
-                              child: new Text('101'),
+                              child: new Text('1'),
                               value: "Morning",
                             ),
                             new DropdownMenuItem(
-                              child: new Text('102'),
+                              child: new Text('2'),
                               value: "Evening",
                             ),
                           ],
@@ -109,14 +139,16 @@ class _ResrvationPageState extends State<ResrvationPage> {
                               _slot = value.toString();
                               if (_slot == "Morning") {
                                 fromTime =
-                                    TimeOfDay(hour: 9, minute: 0) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 9, 00, 00);
                                 toTime =
-                                    TimeOfDay(hour: 12, minute: 30) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 12, 30, 00);
+                                   
                               } else {
                                 fromTime =
-                                    TimeOfDay(hour: 13, minute: 0) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 13, 00, 00);
                                 toTime =
-                                    TimeOfDay(hour: 16, minute: 30) as DateTime;
+                                    new DateTime(_date.year, _date.month, _date.day, 16, 30, 00);
+                                    
                               }
                             });
                           },
@@ -124,7 +156,7 @@ class _ResrvationPageState extends State<ResrvationPage> {
                       ],
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width*0.1,
+                      width: MediaQuery.of(context).size.width * 0.1,
                     ),
                     Column(
                       children: [
@@ -161,7 +193,7 @@ class _ResrvationPageState extends State<ResrvationPage> {
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.05,
+                  height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 TextFormField(
                   initialValue: 'Using for......',
@@ -181,7 +213,7 @@ class _ResrvationPageState extends State<ResrvationPage> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.5,
+                  height: MediaQuery.of(context).size.height * 0.3,
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -202,4 +234,5 @@ class _ResrvationPageState extends State<ResrvationPage> {
       ),
     );
   }
+  
 }
