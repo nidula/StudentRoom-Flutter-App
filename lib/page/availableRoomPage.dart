@@ -23,7 +23,7 @@ class _AvailableRoomsPageState extends State<AvailableRoomsPage> {
 
 Future<List<StudyRoom>> getRooms() async {
     try {
-      String _date = DateFormat('y-d-M').format(date);
+      String _date = DateFormat('y-M-d').format(date);
       int _slt = int.parse(_slot);
     List<StudyRoom> room =  await _roomService.getAvailableRooms(_slt, _date);
   

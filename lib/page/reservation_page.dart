@@ -41,7 +41,7 @@ class _ResrvationPageState extends State<ResrvationPage> {
 
   @override
   void initState() {
-    dat = DateFormat('y-d-M').format(_date);
+    dat = DateFormat('y-M-d').format(_date);
     super.initState();
   }
 

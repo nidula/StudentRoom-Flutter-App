@@ -20,16 +20,16 @@ class _ReservationCardState extends State<ReservationCard> {
   late String location;
   late String floor;
   late String capacity;
-  late String _time;
+  late String _sid;
 
   void ConvertString() {
     int fl = _room.floor;
     int ca = _room.capacity;
-
+    int id = _room.sId;
     location = _room.location;
     floor =  fl.toString();
     capacity = ca.toString();
-    
+    _sid = id.toString();
     print(location);
     print(floor);
     print(capacity);
@@ -38,7 +38,7 @@ class _ReservationCardState extends State<ReservationCard> {
   @override
   void initState() {
     _room = widget.room;
-    _time = widget.tim;
+    //_time = widget.tim;
     ConvertString();
     super.initState();
   }
@@ -168,7 +168,7 @@ class _ReservationCardState extends State<ReservationCard> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.access_time_sharp,
+                                Icons.label_important_outline_rounded,
                                 color: Colors.greenAccent,
                               ),
                               SizedBox(
@@ -176,7 +176,7 @@ class _ReservationCardState extends State<ReservationCard> {
                               ),
                               SizedBox(
                                 child: Text(
-                                  _time,
+                                  _sid,
                                   style: TextStyle(color: Colors.black),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
